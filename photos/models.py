@@ -17,6 +17,12 @@ class Profile(models.Model):
         '''
         self.update()
 
+    def delete_profile(self):
+        '''
+        This is a function that will delete the profile once created
+        '''
+        self.delete()
+
     
 
 class Image(models.Model):

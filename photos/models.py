@@ -4,4 +4,7 @@ from django.db import models
 
 class Image(models.Model):
     image_name = models.CharField(max_length=30)
-    image_caption = models.CharField
+    image_caption = models.TextField()
+    profile = models.ForeignKey(profile)
+    likes = models.IntegerField()
+    comments = models.TextField()

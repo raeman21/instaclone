@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 def home(request):
     images = Image.get_all_images()
     
-    return render(request, 'index.html', {'images':images})
+    return render(request, 'all-photos/home.html', {'images':images})
 
 @login_required(login_url='/accounts/login/')
 def new_pic(request):

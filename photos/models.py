@@ -64,17 +64,17 @@ class Image(models.Model):
         images = Image.objects.all()
         return images
 
-    def update_profile(self):
-        '''
-        This is a function that will update the profile
-        '''
-        self.update()
+    # def update_profile(self):
+    #     '''
+    #     This is a function that will update the profile
+    #     '''
+    #     self.update()
 
-    def delete_profile(self):
-        '''
-        This is a function that will delete the profile once created
-        '''
-        self.delete()
+    # def delete_profile(self):
+    #     '''
+    #     This is a function that will delete the profile once created
+    #     '''
+    #     self.delete()
 
     
 

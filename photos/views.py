@@ -100,7 +100,7 @@ def single_image(request, image_id):
     else:
         form = CommentForm()
         
-    return render(request, 'image.html', {'image':image, 'form':form, 'comments':comments})
+    return render(request, 'all-photos/image.html', {'image':image, 'form':form, 'comments':comments})
 
 def search(request):
     if 'search' in request.GET and request.GET['search']:

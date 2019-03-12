@@ -39,8 +39,8 @@ UPLOADCARE = {
 INSTALLED_APPS = [
     'pyuploadcare.dj',
     'photos',
-    'bootstrap3',
     'tinymce',
+    'bootstrap3',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

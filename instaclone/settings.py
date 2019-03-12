@@ -8,7 +8,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
-MODE = config("MODE", default="dev")
+# MODE = config("MODE", default="dev")
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '&5eh1%0$celnz7n8%^(pq12%q3_&w6stl-izw&!*p9e%cffurl'
 
@@ -18,8 +18,8 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 UPLOADCARE = {
-    'pub_key': config('pub_key'),
-    'secret': config('secret'),
+    'pub_key':'fcdb30bad156bb78ff1b',
+    'secret': 'afe2cdb6c06c522eeeed',
 }
 
 
@@ -47,7 +47,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'instaclone.urls'
@@ -75,23 +75,17 @@ LOGIN_REDIRECT_URL = '/home'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-# if config('MODE') == "dev":
+
 DATABASES = {
         'default': {
-            'ENGINE':  'django.db.backends.postgresql',
-            'NAME': config('DBNAME'),
-            'USER': config('DBUSER'),
-            'PASSWORD': config('DBPASS')
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': config('DB_NAME'),
+            'USER': config('DB_USER'),
+            'PASSWORD': config('DB_PASSWORD'),
             }
 }
 
-# production
-# else:
-#    DATABASES = {
-#        'default': dj_database_url.config(
-#            default=config('DATABASE_URL')
-#        )
-#    }
+
 
 
 # Password validation
@@ -130,8 +124,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-db_from_env=dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+# db_from_env=dj_database_url.config(conn_max_age=500)
+# DATABASES['default'].update(db_from_env)
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
@@ -152,4 +146,4 @@ EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_PORT = config('EMAIL_PORT')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-LOGIN_REDIRECT_URL = "welcome"
+LOGIN_REDIRECT_URL = "/home"

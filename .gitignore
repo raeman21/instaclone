@@ -1,1 +1,5 @@
 virtual
+.env
+*.pyc
+.vscode/
+db.sqlite3

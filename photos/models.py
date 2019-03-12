@@ -75,40 +75,6 @@ class Image(models.Model):
 
     
 
-class Image(models.Model):
-    photo = models.ImageField(upload_to = 'home/')
-    image_name = models.CharField(max_length=30)
-    image_caption = models.TextField()
-    post_date = models.DateTimeField(auto_now=True)
-    likes = models.IntegerField(default=0)
-    comments = models.TextField()
-    profile = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    class Meta:
-        ordering = ('-post_date',)
-
-    def save_image(self):
-        self.save()
-    
-    @classmethod
-    def update_caption(cls, update):
-        pass
-    
-    @classmethod
-    def get_image_id(cls, id):
-        image = Image.objects.get(pk=id)
-        return image
-    
-    @classmethod
-    def get_profile_images(cls, profile):
-        images = Image.objects.filter(profile__pk = profile)
-        return images
-    
-    @classmethod
-    def get_all_images(cls):
-        images = Image.objects.all()
-        return images
-
 class Comments(models.Model):
     comment = HTMLField()
     posted_on = models.DateTimeField(auto_now=True)

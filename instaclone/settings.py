@@ -28,6 +28,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+UPLOADCARE = {
+    'pub_key': config('pub_key'),
+    'secret': config('secret'),
+}
+
 
 # Application definition
 

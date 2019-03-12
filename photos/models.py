@@ -6,7 +6,7 @@ from pyuploadcare.dj.models import ImageField
 
 # Create your models here.
 class Profile(models.Model):
-    profile_photo = models.ImageField(blank=True, manual_crop='800x800')
+    profile_photo = models.ImageField(blank=True,)
     bio = HTMLField()
 
     def save_profile(self):

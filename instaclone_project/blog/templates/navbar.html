@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link href="https://fonts.googleapis.com/css?family=Cedarville+Cursive" rel="stylesheet">
+ <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+</head>
+<body>
+  <nav class="w3-sidebar w3-bar-block w3-white w3-animate-right w3-top w3-text-black w3-large" style="z-index:3;width:250px;font-weight:bold;display:none;right:0;" id="mySidebar">
+    <a href="javascript:void()" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-32">CLOSE</a> 
+    <a href="/" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16">HOME</a>
+    {% if user.is_authenticated %}
+    <a href="/logout" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16">LOGOUT</a>
+    <a href="{% url 'profile'%}" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16">ACCOUNT</a>
+    <a href="{% url 'new-image'%}" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16">ADD IMAGE</a>
+    {%else%}
+    <a href="/accounts/login" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16">LOGIN</a>
+    {%endif%}
+  </nav>
+  
+  <!-- Top menu on small screens -->
+  <header class="w3-container w3-top w3-white w3-xlarge w3-padding-16">
+    <span class="w3-left w3-padding" style="font-family: 'Pacifico', cursive; font-size:25px"><a href="/"> DeeGram</a></span>
+   
+   <span> <a href="javascript:void(0)" class="w3-right w3-button w3-white" onclick="w3_open()">☰</a></span>
+    <span class="w3-right" style="padding-top:10px;padding-right:35px;padding-left:15px;"><a href="{% url 'new-image'%}"><i class="fa fa-plus"></i> </a></span>
+    <form  class= "w3 center"style="margin-top:10px; margin-left:auto;margin-right:auto; width: 30%;" class="navbar-form" role="search" action="{% url 'search'  %}">
+
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search Users" name="search" aria-label="Search">
+          
+          <div class="input-group-btn">
+            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+          </div>
+        
+        </div>
+       
+      </form>
+      
+  </header>
+  
+  <!-- Overlay effect when opening sidebar on small screens -->
+  <div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+<div class="w3-display-container"   class="img-responsive"  style="margin-bottom:100px">
+   
+</div>
+</nav>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</body>
+<script>
+  function Copy() 
+         {
+             //var Url = document.createElement("textarea");
+             urlCopied.innerHTML = window.location.href;
+             //Copied = Url.createTextRange();
+             //Copied.execCommand("Copy");
+             var copied = alert("You can copy link from textarea")
+         }
+
+    
+     function w3_open() {
+      document.getElementById("mySidebar").style.display = "block";
+      document.getElementById("myOverlay").style.display = "block";
+    }
+    
+    function w3_close() {
+      document.getElementById("mySidebar").style.display = "none";
+      document.getElementById("myOverlay").style.display = "none";
+    }
+    
+    // Modal Image Gallery
+    function onClick(element) {
+      document.getElementById("img01").src = element.src;
+      document.getElementById("modal01").style.display = "block";
+      var captionText = document.getElementById("caption");
+      captionText.innerHTML = element.alt;
+    }
+  </script> 
+</html>

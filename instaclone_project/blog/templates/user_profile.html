@@ -1,0 +1,117 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+{% if user.username == user.username %}
+{{ form.media }}
+<title>user / {{profile_details.user.username}}</title>
+<style>
+        body{
+            background-image: url('/static/images/images.jpeg');
+         
+            background-size: 135%;
+            height: 100px;
+        
+        }
+        </style>
+        
+        <body>
+<div class="container top">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row top-section">
+                <div class="col-md-5 profile-image">
+                    {% if profile_details.profile_image %}
+                    <img src="{{profile_details.profile_image.url}}" class="w3-circle" style="height:150px;width:150px"alt="profile-photo">
+                    {% else %}
+                    <img src="/static/images1/images.png"  class="w3-circle" style="height:150px;width:150px"alt="profile-photo" alt="avatar">
+                    {% endif %}
+                </div>
+                <div class="col-md-5 text-center">
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <span class="username">{{ profile_details.user.username }}</span> 
+                        </li>
+                        {% if  profile_details.user.username  == user.username %}
+                        <li class="list-inline-item">
+                          
+                        </li>
+                        <li class="list-inline-item">
+                            <a data-toggle="modal" data-target="#settings"><i class="fa fa-cog fa-2x"></i></a>
+                        </li>
+                        {% else %}
+                        <li class="list-inline-item">
+                     <form action="{%url 'follow_user'%}" method="POST">
+                    {% csrf_token%}
+                    {%if is_followed%}
+                    <button type="submit" name="profile_id" value="{{profile.id}}" class="btn btn-danger"> Unfollow </button>
+                    
+                    {%else%}
+                    <button type="submit" name="profile_id" value="{{profile.id}}" class="button">Follow </button>
+                    
+                    {%endif%}
+                </form>
+               
+                        </li>
+                        {% endif %}
+                    </ul>
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <span class="font-weight-bold">{{images|length}} </span> Posts
+                        </li>
+                        <li class="list-inline-item">
+                            <span class="font-weight-bold"> </span> Followers :{{profile.follows.count}}
+                        </li>
+                        <li class="list-inline-item">
+                            <span class="font-weight-bold"></span> Following :{{profile.followers.count}}
+                        </li>
+                    </ul>
+                    <p class="font3"> About ME: <b>{{profile_details.bio| linebreaks}}</b></p>
+                    {% if profile.username == user.username %}
+                    <p><a href="{% url 'new-image'%}"><i class="fa fa-plus"></i> Add Image</a> </a></p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row user-images">
+            {% for image in images%}
+            <div class="col-md-6">
+            <div class="panel panel-default  card" style="margin-top:20px;width:80%; margin-left: 15%; ">
+
+                    <div class="panel-heading " style="width:100%;height:00px;">
+                       
+                      
+                      <h3 class="text-center"> </h3>
+                    </div>
+                    <div class="panel-body">
+                        <a href="{% url 'myPhoto' image.id%}"> <img src="{{image.image_url.url}}" class="img-responsive"   alt="Image" style="width:350px; height:350px;margin:auto; margin-left: auto;margin-right:auto;"></a> <br>
+                    <p style="font-size:15px;color:grey; margin-top:10px ;padding-left:10px;">{{image.date|timesince|upper}} AGO</p>
+            </div>
+            </div>
+        </div>
+            {%endfor%}
+    </div>
+</div>
+<div class="modal fade" id="settings" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body"><ul class="list-group">
+            <li class="list-group-item text-center"><a href="{% url 'update'%}">Edit Profile</a></li>
+            <li class="list-group-item text-center"><a href="/logout/">Log Out</a></li>
+            <li class="list-group-item text-center"><a data-dismiss="modal">Cancel</a></li>
+          </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+$('.follow-button').click(function() {
+    $.get($(this).data('url'), function(response) {
+        $('.message-section').text(response.message).show();
+    });
+});
+</script>
+{%endif%}
+{% endblock %}

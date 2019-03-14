@@ -1,0 +1,103 @@
+{%extends 'base.html/'%}
+{%block content%}
+{% if user.username == user.username %}
+<h3 class="w3-center"> Welcome {{user.username}}</h3>
+<style>
+  .fa {
+    font-size: 20px;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .fa:hover {
+    color: darkblue;
+                }
+                body{
+                    background-image: url('/static/images/gram1.png');
+                  
+                    background-size: 100%;
+                
+                }
+                </style>
+                
+    <body>
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px"> 
+        <div class="w3-row">
+            
+                <div class="w3-card w3-round w3-white">
+                    <div class="w3-container">
+                        <div class="w3-light-grey">
+                        <h4 class="w3-center" style="padding-top:25px;padding-bottom:15px;">@{{user.username}}</h4>
+                        {%if user.profile.profile_image%}
+                        <p class="w3-center"><img src="{{user.profile.profile_image.url}}" class="w3-circle" style="height:150px;width:150px"></p><hr>
+                        {%else%}
+                        <p class="w3-left"><img src="/static/images1/images.png" class="w3-circle" style="height:150px;width:150px"></p><hr>
+                        {%endif%}
+                        
+                        <p><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i> Username: <b>@{{user.username }} </b></p>
+                        <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>  BIO: <b> {{user.profile.bio}} </b></p>
+                        <p ><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i> Followers: <b>{{followers}} </b></p>
+                        <p><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i> Following : <b>{{following}} </b></p>
+                        <p><i class="fa fa-phone fa-fw w3-margin-right w3-text-theme"></i> Email : <a href="emailto:{{user.email}}">{{user.email}}</a></p>
+                        <p><i class="fa fa-image fa-fw w3-margin-right w3-text-theme"></i> Posts :{{user.images.count}}</p>
+                      </div>
+                      </div>
+                      <li class="list-group-item text-center"><a href="{% url 'update'%}">Edit Profile</a></li>
+                  </div>
+              </div>
+         
+              {% for image in images%}
+              <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" >
+              <div class="panel panel-default" style="margin-top:50px;width:80%; margin-left: 25px; margin-right: 25px;">
+              
+                      <div class="panel-body">
+                              <img src="{{image.image_url.url}}" class="img-responsive"  alt="Image" style="width:350px; height:350px;margin:auto; margin-left: auto;margin-right:auto;"><br>
+                             <h3>{{image.poster}}:{{image.caption}} </h3>
+                      </div>
+                    
+                      <h4 style="font-size:12px;color:grey; margin-top:10px"><i class="fa fa-history"> </i>{{image.date|timesince|upper}} AGO</h4>
+              </div>
+              </div>
+              {%endfor%}
+   
+              {%else%}
+              <p> Welcome to {{profile.user.username}}</p>
+              <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px"> 
+                <div class="w3-row">
+                    
+                        <div class="w3-card w3-round w3-white">
+                            <div class="w3-container">
+                                <div class="w3-light-grey">
+                                <h4 class="w3-center" style="padding-top:25px;padding-bottom:15px;">@{{profile.username}}</h4>
+                                {%if user.profile.profile_image%}
+                                <p class="w3-center"><img src="{{user.profile.profile_image.url}}" class="w3-circle" style="height:150px;width:150px"></p><hr>
+                                {%else%}
+                                <p class="w3-left"><img src="/static/images/avatar.png" class="w3-circle" style="height:120px;width:120px"></p><hr>
+                                {%endif%}
+                                <li class="list-group-item text-center"><a href="{% url 'update'%}">Edit Profile</a></li>
+                                <p><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i> Username: <b>@{{user.username }} </b></p>
+                                <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>  BIO: <b> {{user.profile.bio}} </b></p>
+                                <p ><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i> Followers: <b>{{followers}} </b></p>
+                                <p><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i> Following : <b>{{following}} </b></p>
+                                <p><i class="fa fa-phone fa-fw w3-margin-right w3-text-theme"></i> Email : <a href="emailto:{{user.email}}">{{user.email}}</a></p>
+                                <p><i class="fa fa-image fa-fw w3-margin-right w3-text-theme"></i> Posts :{{user.images.count}}</p>
+                              </div>
+                              </div>
+                          </div>
+                      </div>
+                 
+                      {% for image in images%}
+                      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" >
+                      <div class="panel panel-default" style="margin-top:50px;width:80%; margin-left: 25px; margin-right: 25px;">
+                      
+                              <div class="panel-body">
+                                      <img src="{{image.image_url.url}}" class="img-responsive"  alt="Image" style="width:350px; height:350px;margin:auto; margin-left: auto;margin-right:auto;"><br>
+                                     <h3>{{image.poster}}:{{image.caption}} </h3>
+                              </div>
+                            
+                              <h4 style="font-size:12px;color:grey; margin-top:10px"><i class="fa fa-history"> </i>{{image.date|timesince|upper}} AGO</h4>
+                      </div>
+                      </div>
+                      {%endfor%}
+        {%endif%}
+              {%endblock%}

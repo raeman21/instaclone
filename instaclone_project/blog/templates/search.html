@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<title>Search</title>
+<style>
+body{
+    background-image: url('/static/images/gram1.png');
+  
+    background-size: 100%;
+
+}
+</style>
+
+<body>
+<div class="container top">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h2 class="font2">Search results for @{{message |upper}}</h2>
+        </div>
+    </div>
+    <div class="row">
+            {%if profiles%}
+            {% for profile in profiles %}
+
+
+                                <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px"> 
+                                    <div class="w3-row">
+                                        
+                                            <div class="w3-card w3-round w3-white">
+                                                <div class="w3-container">
+                                                    <div class="w3-light-grey">
+                                                    <h4 class="w3-center" style="padding-top:25px;padding-bottom:15px;"><a href="{%url 'user_profile' username=profile.user.username%}">@{{profile.user.username}}</a></h4>
+                                                    {%if profile.profile_image%}
+                                                    <p class="w3-center"><img src="{{profile.profile_image.url}}" class="w3-circle" style="height:150px;width:150px"></p><hr>
+                                                    {%else%}
+                                                    <p class="w3-left"><img src="/static/images1/images.png" class="w3-circle" style="height:120px;width:120px"></p><hr>
+                                                    {%endif%}
+                        
+                                                    <p><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i> Username: <b> <a href="{%url 'user_profile' username=profile.user.username%}">@{{profile.user.username }} </b> </a></p>
+                                                    <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>  BIO: <b> {{profile.bio}} </b></p>
+                                                    <p ><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i> Followers: <b>{{followers}} </b></p>
+                                                    <p><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i> Following : <b>{{following}} </b></p>
+                                                    <p><i class="fa fa-phone fa-fw w3-margin-right w3-text-theme"></i> Email : <a href="emailto:{{user.email}}">{{profile.user.email}}</a></p>
+                                                    <p><i class="fa fa-image fa-fw w3-margin-right w3-text-theme"></i> Posts :{{profile.user.images.count}}</p>
+                                                  </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+
+        {% endfor %}
+                                          {%else%}
+                                          <h4 style="padding-top:40px;" class="w3-center" > There are no results for you search term ...... <b>{{message | upper}}</b></h4>
+    </div>
+    
+</div>
+{%endif%}
+<div class="col-md-12 text-center">
+      <a></a>        
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+
+{% extends 'base.html' %} ]
+{% block content %}
+<title>Home </title>
+<body style="background-image:url('/static/images/gram1.png')">
+<div class="container ">
+    <div class="row">
+        <div class="col-md-7" style="margin-top:20px;">
+            {% for image in images %}
+            <div class="panel panel-default" style="margin-top:0px;" >
+                <div class="panel-heading">
+                        {%if image.poster.profile.profile_image%}
+                        <h3 class=""> <img src="{{image.poster.profile.profile_image.url}}" style="width:70px;height:70px; border-radius: 50%;" alt="image"></h3>
+                      {%else %}
+                      <h3 class=""> <img src="/static/images/avatar.png" style="width:70px;height:70px; border-radius: 50%;" alt="image"></h3>
+                      {%endif%}
+                </div>
+                <a href="{% url 'myPhoto' image.id%}"> <img src="{{image.image_url.url}}" class="img-responsive"   alt="Image" style="width:350px; height:350px;margin:auto; margin-left: auto;margin-right:auto;"></a> <br>
+                <ul class="list-inline home-text" style="margin-left:15px">
+                        <li class="list-inline-item">
+               
+                                <form action="{%url 'like_image'%}" method="POST">
+                                    {% csrf_token%}
+                                    {%if is_liked%}
+                                    <button type="submit" name="image_id" value="{{image.id}}" class="btn btn-danger"> <i onclick="myFunction(this)" class="fa fa-heart-o fa-2x"></i>disLike </button> <h3</h3> 
+                                    
+                                    {%else%}
+                                    <button type="submit" name="image_id" value="{{image.id}}" class="button"> <i onclick="myFunction(this)" class="fa fa-heart-o fa-2x"></i>Like </button> <h3></h3>
+                                    {%endif%}
+                                  </form>
+                            </li>
+                            <li class="list-inline-item">
+                                    {{image.likes.count}}
+                                 </li>
+                                <li class="list-inline-item">
+                                    <a  href="{% url 'myPhoto' image.id%}"><i class="fa fa-comment-o fa-2x" aria-hidden="true"></i></a> {{ image.comments.count }}
+                                </li>
+                            </ul>
+                <ul class="list-inline home-list">
+                    <li class="list-inline-item">
+                            <h5 style="font-family: 'Gentium Basic', serif; margin-left:10px;"><b><a href="{%url 'user_profile' username=image.poster.username %}" >{{image.poster|upper}} :</a></b>  </h5>
+                    </li>
+                    <li class="list-inline-item">
+                    {% autoescape on %}
+                        <p class="margin-left:0px;">{{image.caption}} </p>
+                    {% endautoescape %}
+                    </li>
+                </ul>
+                
+            </div>
+            {% empty %}
+            <h2>No images. Follow some people to see their images</h2>
+            {% endfor %}
+            
+        </div>
+    </div>
+</div>
+<script>
+        function myFunction(x) {
+          x.classList.toggle("fa-thumbs-down");
+        }
+        </script>
+        </body>
+{% endblock %}

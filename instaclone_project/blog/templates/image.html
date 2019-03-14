@@ -1,0 +1,106 @@
+{%extends 'base.html/'%}
+{% load bootstrap3 %} 
+{%block content%}
+<title>image/{{image.id}}</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+.fa {
+  font-size: 20px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.fa:hover {
+  color: darkblue;
+}
+body{
+    background-image: url('/static/images/gram1.png');
+  
+    background-size: 100%;
+
+}
+</style>
+
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-7" style="margin-top:0px;">
+    <div class="panel-heading " style="width:100%;height:80px;">
+        <div class="panel panel-default" style="margin-top:0px;" >
+            <div class="panel-heading">
+              {% if image.poster.profile.profile_image %}
+              <h3 class=""> <img src="{{image.poster.profile.profile_image.url}}" style="width:70px;height:70px; border-radius: 50%;" alt="image"></h3>
+              {%else%}
+              <img src="/static/images1/images.png"  class="w3-circle" style="height:70px;width:70px"alt="profile-photo" alt="avatar">
+              {% endif %}
+      <h3 class="text-center"> </h3>
+    </div>
+    <div class="panel-body">
+        <a href="{% url 'myPhoto' image.id%}"> <img src="{{image.image_url.url}}" class="img-responsive"   alt="Image" style="width:350px; height:350px;margin:auto; margin-left: auto;margin-right:auto;"></a> <br>
+        <ul class="list-inline home-text">
+            
+            <li class="list-inline-item">
+               
+                <form action="{%url 'like_image'%}" method="POST">
+                    {% csrf_token%}
+                    {%if is_liked%}
+                    <button type="submit" name="image_id" value="{{image.id}}" class="btn btn-danger"> <i onclick="myFunction(this)" class="fa fa-heart-o fa-2x"></i>disLike </button> <h3</h3> 
+                    
+                    {%else%}
+                    <button type="submit" name="image_id" value="{{image.id}}" class="button"> <i onclick="myFunction(this)" class="fa fa-heart-o fa-2x"></i>Like </button> <h3></h3>
+                    {%endif%}
+                   
+                  </form>
+            </li>
+            <li class="list-inline-item">
+                {{image.likes.count}}
+             </li>
+            <li class="list-inline-item">
+                <a  href="" data-toggle="modal" data-target="#myModal"><i class="fa fa-comment-o fa-2x" aria-hidden="true"></i></a> {{ image.comments.count }}
+            </li>
+        </ul>
+        <h5 style="font-family: 'Gentium Basic', serif;"><b><a href="{%url 'user_profile' username=image.poster.username %}" >{{image.poster|upper}} :</a></b> {{image.caption}} </h5>
+       
+    </div>
+    {% for comment in image.comments.all %}
+    <ul class="list-inline home-text">
+            <li class="list-inline-item">
+    <div class="comment" style=" margin: 20px 0px 20px 20px;">
+        <div class="date"></div>
+         <h5 style="font-family: 'Gentium Basic', serif;"> <a href="{%url 'user_profile' username=comment.author.username %}" > <strong>{{ comment.author|upper }} :</strong></a> {{ comment.text}}</h5>
+        <p style="font-size:12px;"> comment created: {{ comment.created_date|timesince|upper }} AGO </p>
+    </div>
+{% empty %}
+    <p>No comments here yet </p>
+{% endfor %}
+</li>
+</ul>
+    <p style="font-size:15px;color:grey; margin-top:10px ;padding-left:10px;">{{image.date|timesince|upper}} AGO</p>
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3> Comments</h3>
+                <div class="modal-body">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <form action="{% url 'myPhoto' image.id %}" method="POST">
+      {% csrf_token %}
+      {% bootstrap_form form%}
+      <input type="submit" class="btn btn-success" value="Comment">
+    </form>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+{%endblock%}

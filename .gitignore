@@ -3,3 +3,4 @@ virtual
 *.pyc
 .vscode/
 db.sqlite3
+pyuploadcare

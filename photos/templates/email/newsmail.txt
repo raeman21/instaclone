@@ -1,3 +1,0 @@
-Hello {{name}}
-
-Welcome to instaclone. Feel free to upload your favourite pics.

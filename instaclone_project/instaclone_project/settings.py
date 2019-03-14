@@ -63,6 +63,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'instaclone_project',
     'blog.apps.BlogConfig',
     'bootstrap3',
     'django_forms_bootstrap',

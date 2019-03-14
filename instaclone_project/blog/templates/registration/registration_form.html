@@ -1,0 +1,50 @@
+{% extends 'registration/base.html' %}
+{% load bootstrap3 %}
+
+{% block content %}
+<link href="https://fonts.googleapis.com/css?family=Cedarville+Cursive" rel="stylesheet">
+ <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+ <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+ <link href="/static/css/style.css" rel="stylesheet">
+ <style>
+ .help-block, label[for="title"] {
+  position: absolute;
+  display: none
+}
+
+ </style>
+<div class="w3-container">
+        <div class="col-md-6">
+        <div class="w3-container w3-hide-small w3-hide-medium">
+            <img src="https://img.icons8.com/cotton/64/000000/instagram-new.png" alt="Phone images" style="height:700px;width:500px; padding-top:25px;">
+        </div>
+        </div>
+        
+        <div class="col-md-6">
+            {% if form.errors %}
+                <p>Some information may be incorrect</p>
+            {% endif %}
+            <div class="signup-fields">
+                <div class="section">
+                    <h3 class=" w3-padding"   style=" font-size:45px; padding-bottom:25px;color:navy;">Instaclone</h3>
+                    <div class="form-section">
+                        <form method="POST" style="padding-top:35px;">
+                            {% csrf_token %}
+                            {% bootstrap_form form %}
+                            <div class="form-group">
+                                <input type="submit" class="button" value="Sign up">
+                            </div>
+                            <input type="hidden" name="next" value="{{next}}">
+                        </form>
+                    </div>
+                </div>
+                <div class="section">
+                    <p>Have an account? <a href="accounts/login/">Sign In</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

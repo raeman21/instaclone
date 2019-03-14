@@ -2,7 +2,7 @@
 {% extends 'base.html' %} ]
 {% block content %}
 <title>Home </title>
-<body style="background-image:url('/static/images/gram1.png')">
+<body style="background-color:navy>
 <div class="container ">
     <div class="row">
         <div class="col-md-7" style="margin-top:20px;">
@@ -10,7 +10,7 @@
             <div class="panel panel-default" style="margin-top:0px;" >
                 <div class="panel-heading">
                         {%if image.poster.profile.profile_image%}
-                        <h3 class=""> <img src="{{image.poster.profile.profile_image.url}}" style="width:70px;height:70px; border-radius: 50%;" alt="image"></h3>
+                        <h3 class=""> <img src="{{image.poster.profile.profile_image.url}}" style="width:70px;height:70px; border-radius: 50%;" alt=""></h3>
                       {%else %}
                       <h3 class=""> <img src="/static/images/avatar.png" style="width:70px;height:70px; border-radius: 50%;" alt="image"></h3>
                       {%endif%}

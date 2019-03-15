@@ -15,8 +15,7 @@
   color: darkblue;
 }
 body{
-    background-image: url('/static/images/gram1.png');
-  
+    background-color:#A9DFBF;
     background-size: 100%;
 
 }
@@ -30,7 +29,7 @@ body{
         <div class="panel panel-default" style="margin-top:0px;" >
             <div class="panel-heading">
               {% if image.poster.profile.profile_image %}
-              <h3 class=""> <img src="{{image.poster.profile.profile_image.url}}" style="width:70px;height:70px; border-radius: 50%;" alt="image"></h3>
+              <h3 class=""> <img src="{{image.poster.profile.profile_image.url}}" style="width:70px;height:70px; border-radius: 50%;" alt=""></h3>
               {%else%}
               <img src="/static/images1/images.png"  class="w3-circle" style="height:70px;width:70px"alt="profile-photo" alt="avatar">
               {% endif %}

@@ -73,8 +73,6 @@ No known bugs. If found please contact me.
     - css
     -Django
 
-## Acknowledgements
-Shabi Oluwadamilola,
 
 ### License
  

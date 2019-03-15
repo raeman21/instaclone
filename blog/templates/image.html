@@ -45,7 +45,7 @@ body{
                 <form action="{%url 'like_image'%}" method="POST">
                     {% csrf_token%}
                     {%if is_liked%}
-                    <button type="submit" name="image_id" value="{{image.id}}" class="btn btn-danger"> <i onclick="myFunction(this)" class="fa fa-heart-o fa-2x"></i>disLike </button> <h3</h3> 
+                    <button type="submit" name="image_id" value="{{image.id}}" class="btn btn-danger"> <i onclick="myFunction(this)" class="fa fa-heart-o fa-2x"></i>disLike</button> <h3</h3> 
                     
                     {%else%}
                     <button type="submit" name="image_id" value="{{image.id}}" class="button"> <i onclick="myFunction(this)" class="fa fa-heart-o fa-2x"></i>Like </button> <h3></h3>

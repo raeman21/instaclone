@@ -11,7 +11,7 @@ django-csvimport==2.11
 django-decouple==2.1
 django-forms-bootstrap==3.1.0
 django-heroku==0.3.1
-django-registration==2.4.1
+django-registration==3.1.2
 django-tinymce==2.8.0
 gunicorn==19.9.0
 idna==2.8
